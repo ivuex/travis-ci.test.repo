@@ -9,7 +9,7 @@ before_install:
 - echo -e "Host 43.255.29.94\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script
 - cd demo01
-- webpack-dev-server
+- webpack
 after_success:
 - npm prune --production
 - tar -jcf demo01.tar.bz2 demo01
