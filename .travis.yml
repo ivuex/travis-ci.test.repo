@@ -7,3 +7,11 @@ before_install:
   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 43.255.29.94\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+script
+- cd demo01
+- webpack-dev-server
+after_success:
+- npm prune --production
+- tar -jcf demo01.tar.bz2 demo01
+- scp demo01.tar.bz2 root@43.255.29.94:~/nodejs.d
+- ssh root@43.255.29.94 'cd ~/nodejs.d && mkidr -p ~/nodejs.d/demo01.d && tar -jxf demo01.tar.bz2 -C ~/nodejs.d/demo01.d/demo01';
